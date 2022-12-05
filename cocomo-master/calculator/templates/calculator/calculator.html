@@ -1,0 +1,136 @@
+{% extends 'calculator/base.html' %}
+{% load bootstrap %}
+{% block head %}
+<title>Калькулятор COCOMO</title>
+{% endblock %}
+{% block content %}
+<body>
+<div class="container">
+    {% if result_form %}
+    <div class="row">
+        <h4>Результаты</h4>
+        <div class="panel panel-primary">
+            <div class="panel-heading"></div>
+            <div class="panel-body">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ result_form|bootstrap }}
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="row">
+        <h4>{{ calculator_name }}</h4>
+        <div class="panel panel-primary">
+            <div class="panel-heading"></div>
+            <div class="panel-body">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {% if calculator_name == 'COCOMO (базовый уровень)' %}
+                        <h3><center>Типы проекта</center></h3>
+                        <p>1. Распространенный тип (organic projects) характеризуется тем, что проект выполняется небольшой группой специалистов, имеющих опыт в создании подобных изделий и
+опыт применения технологических средств. Условия работы стабильны, и изделие имеет
+относительно невысокую сложность. </p>
+                        <p>2. Встроенный тип (embedded projects) характеризуется очень жесткими требованиями
+на программный продукт, интерфейсы, параметры ЭВМ. Как правило, у таких изделий
+высокая степень новизны и планирование работ осуществляется при недостаточной информации, как о самом изделии, так и об условиях работы. Встроенный проект требует
+больших затрат на изменения и исправления. </p>
+                        <p>3. Полунезависимый тип (semidetached projects) занимает промежуточное положение
+между распространенным и встроенным – это проекты средней сложности. Исполнители
+знакомы лишь с некоторыми характеристиками (или компонентами) создаваемой системы, имеют средний опыт работы с подобными изделиями, изделие имеет элемент новизны. Только часть требований к изделию жестко фиксируется, в остальном разработки
+имеют степени выбора.</p>
+                    {{ form|bootstrap }}
+                    {% elif calculator_name == 'COCOMO (промежуточный уровень)' %}
+                        <h3><center>Типы проекта</center></h3>
+                        <p>1. Распространенный тип (organic projects) характеризуется тем, что проект выполняется небольшой группой специалистов, имеющих опыт в создании подобных изделий и
+опыт применения технологических средств. Условия работы стабильны, и изделие имеет
+относительно невысокую сложность. </p>
+                        <p>2. Встроенный тип (embedded projects) характеризуется очень жесткими требованиями
+на программный продукт, интерфейсы, параметры ЭВМ. Как правило, у таких изделий
+высокая степень новизны и планирование работ осуществляется при недостаточной информации, как о самом изделии, так и об условиях работы. Встроенный проект требует
+больших затрат на изменения и исправления. </p>
+                        <p>3. Полунезависимый тип (semidetached projects) занимает промежуточное положение
+между распространенным и встроенным – это проекты средней сложности. Исполнители
+знакомы лишь с некоторыми характеристиками (или компонентами) создаваемой системы, имеют средний опыт работы с подобными изделиями, изделие имеет элемент новизны. Только часть требований к изделию жестко фиксируется, в остальном разработки
+имеют степени выбора.</p>
+                    {{ form.project_type|bootstrap }}
+                    {{ form.size|bootstrap }}
+                    <h4>Характеристики продукта</h4>
+                    {{ form.param_1|bootstrap }}
+                    {{ form.param_2|bootstrap }}
+                    {{ form.param_3|bootstrap }}
+                    <h4>Характеристики аппаратного обеспечения</h4>
+                    {{ form.param_4|bootstrap }}
+                    {{ form.param_5|bootstrap }}
+                    {{ form.param_6|bootstrap }}
+                    {{ form.param_7|bootstrap }}
+                    <h4>Характеристики персонала</h4>
+                    {{ form.param_8|bootstrap }}
+                    {{ form.param_9|bootstrap }}
+                    {{ form.param_10|bootstrap }}
+                    {{ form.param_11|bootstrap }}
+                    {{ form.param_12|bootstrap }}
+                    <h4>Характеристики проекта</h4>
+                    {{ form.param_13|bootstrap }}
+                    {{ form.param_14|bootstrap }}
+                    {{ form.param_15|bootstrap }}
+                    {% elif calculator_name == 'COCOMO II (предварительная оценка)' %}
+                    {{ form.size|bootstrap }}
+                    <h4>Параметры персонала</h4>
+                    {{ form.em_1|bootstrap }}
+                    {{ form.em_2|bootstrap }}
+                    <h4>Параметры продукта</h4>
+                    {{ form.em_3|bootstrap }}
+                    {{ form.em_4|bootstrap }}
+                    <h4>Параметры платформы</h4>
+                    {{ form.em_5|bootstrap }}
+                    <h4>Параметры проекта</h4>
+                    {{ form.em_6|bootstrap }}
+                    {{ form.em_7|bootstrap }}
+                    <h4>Факторы масштаба</h4>
+                    {{ form.sf_8|bootstrap }}
+                    {{ form.sf_9|bootstrap }}
+                    {{ form.sf_10|bootstrap }}
+                    {{ form.sf_11|bootstrap }}
+                    {{ form.sf_12|bootstrap }}
+                    {% elif calculator_name == 'COCOMO II (детальная оценка)' %}
+                    {{ form.size|bootstrap }}
+                    <h4>Параметры персонала</h4>
+                    {{ form.em_1|bootstrap }}
+                    {{ form.em_2|bootstrap }}
+                    {{ form.em_3|bootstrap }}
+                    {{ form.em_4|bootstrap }}
+                    {{ form.em_5|bootstrap }}
+                    {{ form.em_6|bootstrap }}
+                    <h4>Параметры продукта</h4>
+                    {{ form.em_7|bootstrap }}
+                    {{ form.em_8|bootstrap }}
+                    {{ form.em_9|bootstrap }}
+                    {{ form.em_10|bootstrap }}
+                    {{ form.em_11|bootstrap }}
+                    <h4>Параметры платформы</h4>
+                    {{ form.em_12|bootstrap }}
+                    {{ form.em_13|bootstrap }}
+                    {{ form.em_14|bootstrap }}
+                    <h4>Параметры проекта</h4>
+                    {{ form.em_15|bootstrap }}
+                    {{ form.em_16|bootstrap }}
+                    {{ form.em_17|bootstrap }}
+                    <h4>Факторы масштаба</h4>
+                    {{ form.sf_18|bootstrap }}
+                    {{ form.sf_19|bootstrap }}
+                    {{ form.sf_20|bootstrap }}
+                    {{ form.sf_21|bootstrap }}
+                    {{ form.sf_22|bootstrap }}
+                    {% endif %}
+                    <button class="btn btn-primary pull-center"
+                            type="submit">Расчёт
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}

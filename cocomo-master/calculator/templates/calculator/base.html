@@ -1,0 +1,43 @@
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+<div id="wrapper">
+    <div id="content">
+        <div class="menu">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="{% url 'calculator:main' %}">Описание</a>
+                </div>
+                <div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{% url 'calculator:calculator' cocomo_version=1 %}">
+                            <span class="glyphicon glyphicon-asterisk"></span>
+                            COCOMO(базовый ур.)</a></li>
+                        <li><a href="{% url 'calculator:calculator' cocomo_version=2 %}">
+                            <span class="glyphicon glyphicon-asterisk"></span>
+                            COCOMO(промежуточный ур.)</a></li>
+                        <li><a href="{% url 'calculator:calculator' cocomo_version=3 %}">
+                            <span class="glyphicon glyphicon-asterisk"></span>
+                            COCOMOII(предварительная оценка)</a></li>
+                        <li><a href="{% url 'calculator:calculator' cocomo_version=4 %}">
+                            <span class="glyphicon glyphicon-asterisk"></span>
+                            COCOMOII(детальная оценка)</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block content %}{% endblock %}
+    <footer class="card-footer">
+        <p><span class="glyphicon glyphicon-copyright-mark"> В.Р.Силюк, 2022</span>
+        </p>
+    </footer>
+</div>
+</div>
+</body>

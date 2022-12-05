@@ -1,0 +1,217 @@
+{% extends 'calculator/base.html' %}
+{% load bootstrap %}
+{% load static %}
+{% block head %}
+<title>Главная страница</title>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h4>Описание моделей</h4>
+    <input id="toggle_filter_2" type="checkbox" style="visibility:hidden">
+    <label class="btn pull-center btn-success" for="toggle_filter_2"> <span class="glyphicon glyphicon-plus"></span>показать/скрыть</label>
+    <style>
+        .btn-success {
+            color: #fff;
+            background-color: #5fa3d7;
+            border-color: #5fa3d7;
+            }
+
+        .btn-success:hover,
+        .btn-success:active {
+            color: #fff;
+            background-color: #127ccc;
+            border-color: #127ccc;
+        }
+
+    </style>
+    <div class="box well">
+        <div class="panel-heading"></div>
+        <div class="panel-body">
+            <label>Модель базового уровня</label>
+            <p> Двухпараметрическая модель. В качестве параметров выступают объем программы (число строк кода) и тип
+                проекта. В качестве выходных данных для всех моделей являются:
+            <p><center><img src={% static "formula1.png" %}></center></p>
+            <p>PM (People×Month)–трудоемкость (чел.×мес.);
+            </p>
+            <p>TM (Time at Month)–время разработки в календарных месяцах;
+            </p>
+            <p>SIZE–объем программного продукта в тысячах строк исходного текста.</p>
+            <p>Модель этого уровня подходит для ранней быстрой приблизительной оценки затрат, но точность её весьма
+                низка, т.к. не учитываются такие факторы, как квалификация персонала, характеристики оборудования,
+                опыт
+                применения современных методов разработки программного обеспечения и современных инструментальных
+                сред
+                разработки и др.
+            </p>
+            <p><center><strong>Значения коэффициентов базовой уровня моделиCOCOMO в зависимости от типа проекта</strong></center></p>
+            <p><center><img src={% static "Base.png" %}></center></p>
+            <label> Промежуточный уровень</label>
+            <p> На этом уровне базовая модель уточнена за счет ввода дополнительных 15 «атрибутов стоимости» (или
+                факторов затрат) Cost Drivers(CDk), которые сгруппированы по четырем категориям:
+                Характеристики продукта (Product Attributes):
+            </p>
+            <p>-Характеристики продукта(Product Attributes):
+            </p>
+            <p>1. Требуемая надежность ПО(Required Software Reliability);
+            </p>
+            <p>2. Размер БД приложения(Size of Application Database);
+            </p>
+            <p>3. Сложность продукта(Complexity of the Product);
+            </p>
+            <p>-Характеристики аппаратного обеспечения (Hardware Аttributes):
+            </p>
+            <p>4. Ограничения быстродействия при выполнении программы(Run-Time Performance Constraints);
+            </p>
+            <p>5. Ограничения памяти(Memory Constraints);
+            </p>
+            <p>6. Неустойчивость окружения виртуальной машины (Volatility of the Virtual Machine Environment);
+            </p>
+            <p>7. Требуемое время восстановления(Required Turnabout Time);
+            </p>
+            <p>-Характеристики персонала (Personnel Аttributes):
+            </p>
+            <p>8. Аналитические способности(Analyst Capability);
+            </p>
+            <p>9. Способности к разработке ПО(Software Engineer Capability);
+            </p>
+            <p>10. Опыт разработки(Applications Experience);
+            </p>
+            <p>11. Опыт использования виртуальных машин(Virtual Machine Experience);
+            </p>
+            <p>12. Опыт разработки на языках программирования(Programming Language Experience);
+            </p>
+            <p>-Характеристики проекта (ProjectАttributes):
+            </p>
+            <p>13. Использование инструментария разработки ПО(Use of Software Tools);
+            </p>
+            <p>14. Применение методов разработки ПО(Application of Software Engineering Methods);
+            </p>
+            <p>15. Требования соблюдения графика разработки(Required Development Schedule).
+            </p>
+            <p><center><img src={% static "forrmula2.png" %}></center></p>
+            <p><center><strong>Значения атрибутов стоимости в зависимости от их уровня</strong></center></p>
+            <p><center><img src={% static "Prom.png" %}></center></p>
+            <p><center><strong>Значения коэффициентов промежуточного уровня модели СОСОМО в зависимости от типа проекта</strong></center></p>
+            <label>Предварительная оценка</label>
+            <p>В 1997 методика была усовершенствована и получила название COCOMO II. Калибровка параметров производилась уже по 161 проекту разработки ПО.
+Различаются две стадии оценки проекта: предварительная оценка на начальной фазе
+(Early Design) и детальная оценка после проработки архитектуры (Post Architecture).
+Формула оценки трудоемкости проекта в чел.×мес. имеет вид: </p>
+            <p><center><img src={% static "formula3.png" %}></center></p>
+            <p> Стадия предварительной оценки трудоемкости программного проекта (Early Design). Для этой оценки
+                необходимо оценить для проекта уровень семи множителей трудоемкости EMj:
+            </p>
+            <p>–параметры персонала:
+            </p>
+            <p>1. PERS (Personnel Capability)–квалификация персонала (уровень Extra Low–аналитики и программисты
+                имеют
+                низшую квалификацию, текучесть больше 45%; уровень Extra High–аналитики и программисты имеют высшую
+                квалификацию, текучесть меньше 4%);
+            </p>
+            <p>2. PREX (Personal Experience)–опыт персонала (Extra Low–новое приложение, инструменты и платформа;
+                Extra
+                High–приложение, инструменты и платформа хорошо известны);
+            </p>
+            <p>–параметры продукта:
+            </p>
+            <p>3. RCPX (Product Reliability and Complexity)–сложность и надежность продукта (Extra Low–продукт
+                простой,
+                специальных требований по надежности нет, БД маленькая, документация не требуется; ExtraHigh–продукт
+                очень сложный, требования по надежности жесткие, БД сверхбольшая, документация требуется в полном
+                объеме);
+            </p>
+            <p>4. RUSE (Developed for Reusability)–разработка для повторного использования (Low–не требуется; Extra
+                High–предполагается переиспользование в других продуктах);
+            </p>
+            <p>–параметры платформы:
+            </p>
+            <p>5. PDIF (Platform Difficulty)–сложность платформы разработки (Extra Low–специальные ограничения по
+                памяти и быстродействию отсутствуют, платформа стабильна; Extra High–жесткие ограничения по памяти и
+                быстродействию, платформа нестабильна);
+            </p>
+            <p>–параметры проекта:
+            </p>
+            <p>6. FCIL (Facilities) – оборудование (Extra Low–инструменты простейшие, коммуникации затруднены; Extra
+                High–интегрированные средства поддержки жизненного цикла, интерактивные мультимедиа коммуникации);
+            </p>
+            <p>7. SCED (Required Development Schedule)–требуемое выполнение графика работ(Very Low–75% от номинальной
+                длительности; Very High–160% от номинальной длительности).</p>
+            <p><center><strong>Значения множителей трудоемкости в зависимости от оценки их уровня (EarlyDesign)</strong></center></p>
+            <p><center><img src={% static "Сm2.png" %}></center></p>
+            <p>-факторы масштаба:
+            </p>
+            <p>8. PREC (Precedentedness)-Прецедентность, наличие опыта аналогичных разработок.
+            </p>
+            <p>9. FLEX (Development Flexibility)-Гибкость процесса разработки.
+            </p>
+            <p>10. RESL (Architecture/Risk Resolution)-Архитектура и разрешение рисков.
+            </p>
+            <p>11. TEAM (Team Cohesion)-Сработанность команды.
+            </p>
+            <p>12. PMAT (Process Maturity)-Зрелость процессов.</p>
+            
+            <label> Стадия детальной оценки</label>
+            <p>Стадия предварительной оценки трудоемкости программного проекта(Early Design). Для этой оценки
+                необходимо оценить для проекта уровень семи множителей трудоемкости EMj:
+            </p>
+            <p>–параметры персонала:
+            </p>
+            <p>1. ACAP (Analyst Capability)-Возможности аналитики
+            </p>
+            <p>2. AEXP (Applications Experience)-Опыт разработки приложений
+            </p>
+            <p>3. PCAP (Programmer Capability)-Возможности программиста
+            </p>
+            <p>4. PCON (Personnel Continuity)-Продолжительность работы персонала
+            </p>
+            <p>5. PEXP (Platform Experience)-Опыт работы с платформой
+            </p>
+            <p>6.LTEX (Language and Tool Experience)-Опыт использования языка программирования и инструментальных средств
+            </p>
+            <p>–параметры продукта:
+            </p>
+            <p>7. RELY (Required Software Resolution)-Требуемая надежность программы
+            </p>
+            <p>8. DATA (Database Size)-Размер базы данных
+            </p>
+            <p>9. CPLX (Software Product Complexity)- Сложность программы
+            </p>
+            <p>10. RUSE (Required Reusability)-Требуемая возможность многократного использования
+            </p>
+            <p>11. DOCU (Documentation Match to Life-Cycle Needs)-Соответствие документации потребностям жизненного цикла
+            </p>
+            <p>–параметры платформы:
+            </p>
+            <p>12. TIME (Execution Time Constraints)-Ограничение времени выполнения
+            </p>
+            <p>13. STOR (Main Storage Constraint)-Ограничение памяти
+            </p>
+            <p>14. PVOL (Platform Volatility)-Изменяемость платформы
+            </p>
+            <p>–параметры проекта:
+            </p>
+            <p>15. TOOL (Use of Software Tools)-Использование инструментальных программных средств
+            </p>
+            <p>16. SITE (Multsite Development)-Многоабонентская (удаленная) разработка
+            </p>
+            <p>17. SCED (Required Development Schedule)-Требуемое выполнение графика работ
+            </p>
+            <p><center><strong>Значения множителей трудоемкости в зависимости от оценки их уровня (Post Architecture)</strong></center></p>
+            <p><center><img src={% static "Cm22.png" %}></center></p>
+            <p>Оценка длительности проекта</p>
+            <p><center><img src={% static "formula4.png" %}></center></p>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h4>Информация о разработчике</h4>
+    <input id="toggle_filter_3" type="checkbox" style="visibility:hidden">
+    <label class="btn pull-center btn-success" for="toggle_filter_3"> <span class="glyphicon glyphicon-plus"></span>показать/скрыть</label>
+    <div class="box well">
+        <div class="panel-heading"></div>
+        <div class="panel-body">
+            Работа выполнена студентом Томского Государственного Университета Систем Управления и Радиоэлектроники, факультета систем управления, кафедры автоматизированных систем управления, по дисциплине "Программная инженерия" Силюк Вероникой Романовной гр. 440-1 на языке: python, html, css, в программе "Pycharme".
+        </div>
+    </div>
+</div>
+{% endblock %}
